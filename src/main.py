@@ -3,8 +3,8 @@
 
 def main():
     """Run the app."""
-    print("\nProgram runs\n")
+    print("Program runs")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

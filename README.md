@@ -6,7 +6,7 @@ Hi, it's Liu0001. It's the first test app that I'm creating.
 
 ## Intro
 
-Weekleh is your weekly to-do list, 
+Weekleh is your weekly to-do list,
 where you log in, add your weekly to do item.
 So, you add an activity, such as 'Running' and times: '3'.
 Then you can tick off that item, and the amount per week will decrease by 1.
