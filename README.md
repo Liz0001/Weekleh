@@ -1,7 +1,7 @@
 # WEEKLEH
 =========
 
-Hi, it's Liu0001. It's the first test app that I'm creating.
+Hi, it's Liis. Weekleh is a test app that I'm creating.
 
 
 ## Intro
@@ -29,6 +29,6 @@ Well, let us see if we can actually make it happen.
 
 
 ## general
-- Front end: QT
+- Front end: QT, CSS
 - Backend: Python
 - Database: ...
