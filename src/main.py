@@ -1,9 +1,13 @@
 """Weekleh app."""
+# from Login.login import Ui_MainWindow
+import sys
+
+sys.path.insert(0, "../src")
 
 
 def main():
     """Run the app."""
-    print("Program runs")
+    pass
 
 
 if __name__ == "__main__":
