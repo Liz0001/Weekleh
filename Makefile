@@ -47,5 +47,5 @@ coverage:
 
 
 # run the app
-weekleh:
+plans:
 	python weekleh.py

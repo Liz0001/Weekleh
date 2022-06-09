@@ -5,3 +5,4 @@ src/__pycache__
 *.pyc
 .vscode
 designer.exe - Shortcut.lnk
+.qt_for_python/*
