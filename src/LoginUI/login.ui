@@ -264,7 +264,7 @@ height:25px;</string>
             <string/>
            </property>
            <property name="pixmap">
-            <pixmap>../Images/logo_sample1.PNG</pixmap>
+            <pixmap>../Images/logo.PNG</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
