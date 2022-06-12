@@ -4,8 +4,7 @@
 Hi, it's Liis.
 Weekleh is a test app that I'm creating.
 
-
-## Intro
+#### Intro
 
 Weekleh is your weekly to-do list,
 where you log in, add your weekly to do item.
@@ -15,7 +14,14 @@ Left is only 'Running: 2'.
 Well, let us see if we can actually make it happen.
 
 
+
+## Installation
+
+...
+
+
 ## Features
+
 1. Log in
 2. Add a note
 3. Mark it done
@@ -25,11 +31,8 @@ Well, let us see if we can actually make it happen.
 7. Log out
 
 
-## Install
-...
-
-
 ## General
+
 - Front end: PyQt
 - Backend: Python
 - Database: Sqlite
