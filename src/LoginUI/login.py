@@ -56,7 +56,7 @@ class LoginWindowUI(object):
         self.image.setStyleSheet("border-radius: 5px;")
         self.image.setFrameShadow(QtWidgets.QFrame.Plain)
         self.image.setText("")
-        self.image.setPixmap(QtGui.QPixmap(os.path.join(path + "/Images/login.jpg")))
+        self.image.setPixmap(QtGui.QPixmap(os.path.join(path + "/images/login.jpg")))
         self.image.setScaledContents(True)
         self.image.setAlignment(QtCore.Qt.AlignCenter)
         self.image.setWordWrap(False)
@@ -143,7 +143,7 @@ class LoginWindowUI(object):
         self.logo.setGeometry(QtCore.QRect(150, 10, 400, 175))
 
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap(os.path.join(path + "/Images/logo.PNG")))
+        self.logo.setPixmap(QtGui.QPixmap(os.path.join(path + "/images/logo.PNG")))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
 
@@ -175,7 +175,6 @@ class LoginWindowUI(object):
         self.sign_in.setStyleSheet("#sign_in {\n"
             "background: rgba(243,151,102, 0.9);\n"
             "color: #f6f6f6;\n"
-            "cursor: pointer;\n"
             "border: none;\n"
             "}\n"
 
