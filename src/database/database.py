@@ -9,8 +9,7 @@ c = conn.cursor()
 # Create a table
 # c.execute("""CREATE TABLE user (
 #         user_id integer,   # make it primanry key and auto increment
-#         fname text,
-#         lname text,
+#         name text,
 #         email text,
 #         password text
 #         )""")

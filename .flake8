@@ -1,5 +1,5 @@
 [flake8]
 per-file-ignores =
-    src/*.py: E501, E128
+    src/*.py: E501, E128, E101
 
 # noqa: ignore=E128,E501,D102
