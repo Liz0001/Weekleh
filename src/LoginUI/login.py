@@ -103,7 +103,7 @@ class LoginWindowUI(object):
         self.create_acc_layout.setObjectName("create_acc_layout")
         self.create_account_1 = QtWidgets.QLabel(self.layoutWidget)
         self.create_account_1.setMinimumSize(QtCore.QSize(0, 0))
-        self.create_account_1.setStyleSheet("font-size: 16px;\n"
+        self.create_account_1.setStyleSheet("font-size: 18px;\n"
             "color: #a3a3a3;")
 
         self.create_account_1.setAlignment(QtCore.Qt.AlignCenter)
@@ -114,7 +114,7 @@ class LoginWindowUI(object):
         self.create_account_2 = QtWidgets.QPushButton(
             self.layoutWidget, clicked=lambda: self.open_create_acc(LoginWindow))
         self.create_account_2.setStyleSheet("*{\n"
-            "font-size: 16px;\n"
+            "font-size: 18px;\n"
             "color: #a3a3a3;\n"
             "padding-bottom:3px;\n"
             "}\n"
