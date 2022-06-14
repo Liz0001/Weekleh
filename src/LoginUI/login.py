@@ -1,19 +1,31 @@
 """
-App's login page.
+LOGIN PAGE UI.
 
-# -*- coding: utf-8 -*-
-# Created by: PyQt5 UI code generator 5.15.4
+-*- coding: utf-8 -*-
+Created by: PyQt5 UI code generator 5.15.4
 """
 
 import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+from src.CreateAccountUI.create_account import CreateAccountWindowUI, open_create_account
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
 
 class LoginWindowUI(object):
     """The login Window."""
+
+    def open_create_acc(self, LoginWindow):
+        """Go to Create account page."""
+        LoginWindow.close()
+        self.CreateAccountWindow = QtWidgets.QMainWindow()
+        self.ui = CreateAccountWindowUI()
+        self.ui.setupUi(self.CreateAccountWindow)
+        self.CreateAccountWindow.showMaximized()
+        self.CreateAccountWindow.setFocus()
+        open_create_account()
 
     def setupUi(self, LoginWindow):
         """UI Setup."""
@@ -98,7 +110,8 @@ class LoginWindowUI(object):
         self.create_account_1.setAlignment(QtCore.Qt.AlignCenter)
         self.create_account_1.setObjectName("create_account_1")
         self.create_acc_layout.addWidget(self.create_account_1)
-        self.create_account_2 = QtWidgets.QPushButton(self.layoutWidget)
+        self.create_account_2 = QtWidgets.QPushButton(
+            self.layoutWidget, clicked=lambda: self.open_create_acc(LoginWindow))
         self.create_account_2.setStyleSheet("*{\n"
             "font-size: 16px;\n"
             "color: #a3a3a3;\n"
@@ -240,7 +253,16 @@ class LoginWindowUI(object):
         self.forgot_password.setText(_translate("LoginWindow", "Forgot password?"))
 
 
-def run_login_page():
+def open_login():
+    """Open the window, can run while other windowns are open."""
+    LoginWindow = QtWidgets.QMainWindow()
+    ui = LoginWindowUI()
+    ui.setupUi(LoginWindow)
+    LoginWindow.showMaximized()
+    LoginWindow.setFocus()
+
+
+def login_main():
     """Run the window."""
     app = QtWidgets.QApplication(sys.argv)
     LoginWindow = QtWidgets.QMainWindow()
@@ -252,4 +274,4 @@ def run_login_page():
 
 
 if __name__ == "__main__":
-    run_login_page()
+    login_main()

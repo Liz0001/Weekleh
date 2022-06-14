@@ -7,7 +7,7 @@ sys.path.insert(0, "..")
 
 def weekleh():
     """Run the app."""
-    login.run_login_page()
+    login.login_main()
 
 
 if __name__ == "__main__":
