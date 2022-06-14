@@ -1,5 +1,5 @@
 """
-CREATE ACCOUNT PAGE UI.
+# UI for Create Account Page.
 
 -*- coding: utf-8 -*-
 Created by: PyQt5 UI code generator 5.15.4
@@ -9,24 +9,22 @@ import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-# from LoginUI.login import LoginWindowUI, open_login
 from src.LoginUI import login
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
 
 class CreateAccountWindowUI(object):
-    """The Create Account Window."""
+    """The Create Account Window Class."""
 
     def open_sign_in(self, CreateAccountWindow):
-        """Open Login Window."""
-        CreateAccountWindow.close()
+        """Open the Login Window."""
         self.LoginWindow = QtWidgets.QMainWindow()
         self.ui = login.LoginWindowUI()
         self.ui.setupUi(self.LoginWindow)
         self.LoginWindow.showMaximized()
         self.LoginWindow.setFocus()
-        login.open_login()
+        CreateAccountWindow.close()
 
     def setupUi(self, CreateAccountWindow):
         """UI Setup."""
@@ -254,15 +252,6 @@ class CreateAccountWindowUI(object):
         self.name_input.setPlaceholderText(_translate("CreateAccountWindow", "Enter your name"))
         self.email_label.setText(_translate("CreateAccountWindow", "Email*"))
         self.email_input.setPlaceholderText(_translate("CreateAccountWindow", "Enter your email"))
-
-
-def open_create_account():
-    """Open the window, can run while other windowns are open."""
-    CreateAccountWindow = QtWidgets.QMainWindow()
-    ui = CreateAccountWindowUI()
-    ui.setupUi(CreateAccountWindow)
-    CreateAccountWindow.showMaximized()
-    CreateAccountWindow.setFocus()
 
 
 def create_account_main():
