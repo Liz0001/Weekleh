@@ -43,9 +43,17 @@ class CreateAccountWindowUI(object):
         msg.setWindowTitle("Account created!")
         msg.setText("Amazing! Account successfully created.")
         msg.setIcon(QMessageBox.Information)
-        msg.setStandardButtons(QMessageBox::Save)
+        msg.setStandardButtons(QMessageBox::"Log In")
         # msg.setDefaultButton(QMessageBox::"Go to Sign In")
         msg.exec_()
+        
+        if QMessageBox::"Log In":
+            self.LoginWindow = QtWidgets.QMainWindow()
+            self.ui = login.LoginWindowUI()
+            self.ui.setupUi(self.LoginWindow)
+            self.LoginWindow.showMaximized()
+            self.LoginWindow.setFocus()
+            CreateAccountWindow.close()
 
     def open_sign_in(self, CreateAccountWindow):
         """Open the Login Window."""
