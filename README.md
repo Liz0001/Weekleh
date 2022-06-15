@@ -35,4 +35,4 @@ Well, let us see if we can actually make it happen.
 
 - Front end: PyQt
 - Backend: Python
-- Database: Sqlite
+- Database: SQLite

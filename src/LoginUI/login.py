@@ -10,6 +10,9 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from src.CreateAccountUI.create_account import CreateAccountWindowUI
+
+# Only for testing
+from src.MainUI.main_window import Ui_MainWindow
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
@@ -24,6 +27,14 @@ class LoginWindowUI(object):
         self.ui.setupUi(self.CreateAccountWindow)
         self.CreateAccountWindow.showMaximized()
         self.CreateAccountWindow.setFocus()
+        LoginWindow.close()
+        
+    def open_main(self, LoginWindow):
+        """Open MainWindow, after successful login."""
+        self.MainWindow = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.MainWindow)
+        self.MainWindow.showMaximized()
         LoginWindow.close()
 
     def setupUi(self, LoginWindow):
@@ -179,12 +190,14 @@ class LoginWindowUI(object):
         self.password_input = QtWidgets.QLineEdit(self.layoutWidget2)
         self.password_input.setStyleSheet("background: rgba(243,151,102, 0.05);\n"
             "padding: 5px;\n"
-            "height:35px;")
+            "height: 35px;")
 
+        self.password_input.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_input.setText("")
         self.password_input.setObjectName("password_input")
         self.password_layout.addWidget(self.password_input)
-        self.sign_in = QtWidgets.QPushButton(self.sign_in_frame_inner)
+        self.sign_in = QtWidgets.QPushButton(
+            self.sign_in_frame_inner, clicked=lambda: self.open_main(LoginWindow))
         self.sign_in.setGeometry(QtCore.QRect(160, 500, 380, 50))
         self.sign_in.setStyleSheet("#sign_in {\n"
             "background: rgba(243,151,102, 0.9);\n"

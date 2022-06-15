@@ -8,14 +8,44 @@ Created by: PyQt5 UI code generator 5.15.4
 import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 from src.LoginUI import login
+from src import login_credentials
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
 
 class CreateAccountWindowUI(object):
     """The Create Account Window Class."""
+
+    def create_new_account(self, CreateAccountWindow):
+        """Create new account."""
+        self.account_created_popup()
+    
+
+    def show_popup_name_email(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Check your Name or Email")
+        msg.setText("You have entered a wrong email address or password. Try again")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
+    def show_popup_password(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Check your Password!")
+        msg.setText("You entered wrong email address or password. Try again")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
+    def account_created_popup(self):
+        msg = QMessageBox()
+        msg.setWindowTitle("Account created!")
+        msg.setText("Amazing! Account successfully created.")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStandardButtons(QMessageBox::Save)
+        # msg.setDefaultButton(QMessageBox::"Go to Sign In")
+        msg.exec_()
 
     def open_sign_in(self, CreateAccountWindow):
         """Open the Login Window."""
@@ -91,10 +121,11 @@ class CreateAccountWindowUI(object):
         self.logo = QtWidgets.QLabel(self.create_acc_frame_inner)
         self.logo.setGeometry(QtCore.QRect(150, 10, 400, 175))
         self.logo.setText("")
-        self.logo.setPixmap(QtGui.QPixmap("C:/Users/liisu/Desktop/Weekleh/src/CreateAccountUI\\../images/logo.PNG"))
+        self.logo.setPixmap(QtGui.QPixmap(os.path.join(path + "/images/logo.PNG")))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
-        self.create_account_button = QtWidgets.QPushButton(self.create_acc_frame_inner)
+        self.create_account_button = QtWidgets.QPushButton(
+            self.create_acc_frame_inner, clicked=lambda: self.create_new_account(CreateAccountWindow))
         self.create_account_button.setGeometry(QtCore.QRect(160, 620, 380, 50))
         self.create_account_button.setStyleSheet("#create_account_button {\n"
             "background: rgba(243,151,102, 0.9);\n"
@@ -133,6 +164,7 @@ class CreateAccountWindowUI(object):
             "padding: 5px;\n"
             "height:35px;")
 
+        self.password_input.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_input.setText("")
         self.password_input.setObjectName("password_input")
         self.password_layout.addWidget(self.password_input)
@@ -141,6 +173,7 @@ class CreateAccountWindowUI(object):
             "padding: 5px;\n"
             "height:35px;")
 
+        self.password_input_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_input_2.setText("")
         self.password_input_2.setObjectName("password_input_2")
         self.password_layout.addWidget(self.password_input_2)
@@ -206,6 +239,7 @@ class CreateAccountWindowUI(object):
 
         self.name_input.setObjectName("name_input")
         self.name_layout.addWidget(self.name_input)
+
         self.widget1 = QtWidgets.QWidget(self.create_acc_frame_inner)
         self.widget1.setGeometry(QtCore.QRect(160, 350, 380, 90))
         self.widget1.setObjectName("widget1")
