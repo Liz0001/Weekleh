@@ -21,42 +21,106 @@ class CreateAccountWindowUI(object):
 
     def create_new_account(self, CreateAccountWindow):
         """Create new account."""
-        self.account_created_popup()
-    
+        __login_success = True
 
-    def show_popup_name_email(self):
+        if self.name_input.text() == "" and self.email_input.text() == "" and self.password_input.text() == "" and self.password_input_2.text() == "":
+            self.all_fields_empty()
+            __login_success = False
+            
+        elif not login_credentials.check_name(self.name_input.text()):
+            self.invalid_name_popup()
+            __login_success = False
+            
+        elif self.name_input.text() == "" or self.email_input.text() == "" or self.password_input.text() == "" or self.password_input_2.text() == "":
+            __login_success = False
+
+        elif not login_credentials.check_email(self.email_input.text()):
+            self.invalid_email_popup()
+            __login_success = False
+
+        elif not login_credentials.check_password(self.password_input.text()):
+            self.weak_password_popup()
+            __login_success = False
+
+        elif not login_credentials.check_password_match(self.password_input.text(), self.password_input_2.text()):
+            self.passwords_not_matching_popup()
+            __login_success = False
+
+        if __login_success:
+            action = self.account_created_popup()
+            if action == 1024:
+                self.LoginWindow = QtWidgets.QMainWindow()
+                self.ui = login.LoginWindowUI()
+                self.ui.setupUi(self.LoginWindow)
+                self.LoginWindow.showMaximized()
+                self.LoginWindow.setFocus()
+                CreateAccountWindow.close()
+            else:
+                self.name_input.clear()
+                self.email_input.clear()
+                self.password_input.clear()
+                self.password_input_2.clear()
+                
+
+    def all_fields_empty(self):
+        """Give a warning that name is not valid."""
         msg = QMessageBox()
-        msg.setWindowTitle("Check your Name or Email")
-        msg.setText("You have entered a wrong email address or password. Try again")
-        msg.setIcon(QMessageBox.Information)
+        msg.setWindowTitle("Nothing to create.")
+        msg.setText("All fields are empty!\nYou need to fill the form in order to create an account.")
+        msg.setIcon(QMessageBox.Critical)
         msg.exec_()
 
-    def show_popup_password(self):
+    def invalid_name_popup(self):
+        """Give a warning that name is not valid."""
+        msg = QMessageBox()
+        msg.setWindowTitle("Check your Name")
+        msg.setText("The name you entered is not valid. Make sure there are no special characters!")
+        msg.setIcon(QMessageBox.Warning)
+        msg.exec_()
+
+    def invalid_email_popup(self):
+        """Give a warning that email is not valid."""
+        msg = QMessageBox()
+        msg.setWindowTitle("Check your Email")
+        msg.setText("You have entered invalid email address. Please check your email!")
+        msg.setIcon(QMessageBox.Critical)
+        msg.exec_()
+
+    def weak_password_popup(self):
+        """Give a warning that password is not good."""
         msg = QMessageBox()
         msg.setWindowTitle("Check your Password!")
-        msg.setText("You entered wrong email address or password. Try again")
-        msg.setIcon(QMessageBox.Information)
+        msg.setText("You have entered a weak password. Try again")
+        msg.setInformativeText('- One Capital Letter\n- One Number\n- Special Character\n- Length Should be 6-30.')
+        msg.setIcon(QMessageBox.Warning)
+        msg.exec_()
+
+    def passwords_not_matching_popup(self):
+        """Give a warning that passwords are not matching."""
+        msg = QMessageBox()
+        msg.setWindowTitle("Check your Password!")
+        msg.setText("Passwords entered do not match!")
+        msg.setIcon(QMessageBox.Critical)
         msg.exec_()
 
     def account_created_popup(self):
+        """Account created, go to 'Log In'."""
         msg = QMessageBox()
         msg.setWindowTitle("Account created!")
         msg.setText("Amazing! Account successfully created.")
+        msg.setInformativeText('Go to "Log In".')
         msg.setIcon(QMessageBox.Information)
-        # msg.setStandardButtons(QMessageBox::"Log In")
-        # msg.setDefaultButton(QMessageBox::"Go to Sign In")
-        msg.exec_()
-        
-        # if QMessageBox::"Log In":
-        #     self.LoginWindow = QtWidgets.QMainWindow()
-        #     self.ui = login.LoginWindowUI()
-        #     self.ui.setupUi(self.LoginWindow)
-        #     self.LoginWindow.showMaximized()
-        #     self.LoginWindow.setFocus()
-        #     CreateAccountWindow.close()
+        msg.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+        msg.buttonClicked.connect(self.popup_action_ok)
+        action = msg.exec_()
+        return action
+
+    def popup_action_ok(self):
+        """."""
+        pass
 
     def open_sign_in(self, CreateAccountWindow):
-        """Open the Login Window."""
+        """Open the Sign In / Log In Window."""
         self.LoginWindow = QtWidgets.QMainWindow()
         self.ui = login.LoginWindowUI()
         self.ui.setupUi(self.LoginWindow)
@@ -64,6 +128,7 @@ class CreateAccountWindowUI(object):
         self.LoginWindow.setFocus()
         CreateAccountWindow.close()
 
+    # Create Account Window setup starts here
     def setupUi(self, CreateAccountWindow):
         """UI Setup."""
         CreateAccountWindow.setObjectName("CreateAccountWindow")
@@ -132,6 +197,8 @@ class CreateAccountWindowUI(object):
         self.logo.setPixmap(QtGui.QPixmap(os.path.join(path + "/images/logo.PNG")))
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
+
+        # Create account
         self.create_account_button = QtWidgets.QPushButton(
             self.create_acc_frame_inner, clicked=lambda: self.create_new_account(CreateAccountWindow))
         self.create_account_button.setGeometry(QtCore.QRect(160, 620, 380, 50))
