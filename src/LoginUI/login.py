@@ -28,7 +28,7 @@ class LoginWindowUI(object):
         self.CreateAccountWindow.showMaximized()
         self.CreateAccountWindow.setFocus()
         LoginWindow.close()
-        
+
     def open_main(self, LoginWindow):
         """Open MainWindow, after successful login."""
         self.MainWindow = QtWidgets.QMainWindow()
