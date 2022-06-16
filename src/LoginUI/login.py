@@ -8,6 +8,7 @@ Created by: PyQt5 UI code generator 5.15.4
 import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+from qtwidgets import PasswordEdit
 
 from src.CreateAccountUI.create_account import CreateAccountWindowUI
 
@@ -187,12 +188,11 @@ class LoginWindowUI(object):
         self.password_label.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
         self.password_label.setObjectName("password_label")
         self.password_layout.addWidget(self.password_label)
-        self.password_input = QtWidgets.QLineEdit(self.layoutWidget2)
+        # password hide/show
+        self.password_input = PasswordEdit()
         self.password_input.setStyleSheet("background: rgba(243,151,102, 0.05);\n"
             "padding: 5px;\n"
             "height: 35px;")
-
-        self.password_input.setEchoMode(QtWidgets.QLineEdit.Password)
         self.password_input.setText("")
         self.password_input.setObjectName("password_input")
         self.password_layout.addWidget(self.password_input)
