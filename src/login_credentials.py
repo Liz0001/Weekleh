@@ -20,10 +20,40 @@ def check_email(email):
 
 def check_password(pwd):
     """Check that passwords are correct."""
-    __regex_pass = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,32}$')
-    if re.fullmatch(__regex_pass, pwd):
-        return True
-    return False
+    # Special characters: " !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+
+    __SpecialSym = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')',
+                    '*', '+', ',', '-', '.', '/', ':', ';', '<', '=',
+                    '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{',
+                    '|', '}', '~']
+    __val = True
+
+    # 'length should be at least 6'
+    if len(pwd) < 6:
+        __val = False
+
+    # 'length should be not be greater than 30'
+    if len(pwd) > 30:
+        __val = False
+
+    # 'Password should have at least one numeral'
+    if not any(char.isdigit() for char in pwd):
+        __val = False
+
+    # 'Password should have at least one uppercase letter'
+    if not any(char.isupper() for char in pwd):
+        __val = False
+
+    # 'Password should have at least one lowercase letter'
+    if not any(char.islower() for char in pwd):
+        __val = False
+
+    # 'Password should have at least one of the symbols $@#'
+    if not any(char in __SpecialSym for char in pwd):
+        __val = False
+
+    if __val:
+        return __val
 
 
 def check_password_match(pwd1, pwd2):

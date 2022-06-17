@@ -28,11 +28,11 @@ class CreateAccountWindowUI(object):
         if self.name_input.text() == "" and self.email_input.text() == "" and self.password_input.text() == "" and self.password_input_2.text() == "":
             self.all_fields_empty()
             __login_success = False
-            
+
         elif not login_credentials.check_name(self.name_input.text()):
             self.invalid_name_popup()
             __login_success = False
-            
+
         elif self.name_input.text() == "" or self.email_input.text() == "" or self.password_input.text() == "" or self.password_input_2.text() == "":
             __login_success = False
 
@@ -62,7 +62,6 @@ class CreateAccountWindowUI(object):
                 self.email_input.clear()
                 self.password_input.clear()
                 self.password_input_2.clear()
-                
 
     def all_fields_empty(self):
         """Give a warning that name is not valid."""
