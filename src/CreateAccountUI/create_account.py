@@ -57,7 +57,9 @@ class CreateAccountWindowUI(object):
                 self.LoginWindow.showMaximized()
                 self.LoginWindow.setFocus()
                 CreateAccountWindow.close()
+                create_user_account.create_account(self.name_input.text(), self.email_input.text(), self.password_input.text())
             else:
+                create_user_account.create_account(self.name_input.text(), self.email_input.text(), self.password_input.text())
                 self.name_input.clear()
                 self.email_input.clear()
                 self.password_input.clear()
