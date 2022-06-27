@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from src import main_main
 
 
 class Ui_MainWindow(object):
@@ -39,7 +40,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Welcome!"))
+        self.label.setText(_translate("MainWindow", f"Welcome! {main_main.greet()}"))
 
 
 if __name__ == "__main__":

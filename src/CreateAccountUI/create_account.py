@@ -12,8 +12,8 @@ from PyQt5.QtWidgets import QMessageBox
 from qtwidgets import PasswordEdit
 
 from src.LoginUI import login
-from src import login_credentials
-from src import create_user_account
+from src import login_security
+from src import create_account_login
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
@@ -29,26 +29,30 @@ class CreateAccountWindowUI(object):
             self.all_fields_empty()
             __login_success = False
 
-        elif not login_credentials.check_name(self.name_input.text()):
+        elif not login_security.check_name(self.name_input.text()):
             self.invalid_name_popup()
             __login_success = False
 
         elif self.name_input.text() == "" or self.email_input.text() == "" or self.password_input.text() == "" or self.password_input_2.text() == "":
             __login_success = False
 
-        elif not login_credentials.check_email(self.email_input.text()):
+        elif not login_security.check_email(self.email_input.text()):
             self.invalid_email_popup()
             __login_success = False
 
-        elif not login_credentials.check_password(self.password_input.text()):
+        elif not login_security.check_password(self.password_input.text()):
             self.weak_password_popup()
             __login_success = False
 
-        elif not login_credentials.check_password_match(self.password_input.text(), self.password_input_2.text()):
+        elif not login_security.check_password_match(self.password_input.text(), self.password_input_2.text()):
             self.passwords_not_matching_popup()
             __login_success = False
 
+        elif create_account_login.check_if_email_exists(self.email_input.text()):
+            __login_success = False
+
         if __login_success:
+            create_account_login.create_account(self.name_input.text(), self.email_input.text(), self.password_input.text())
             action = self.account_created_popup()
             if action == 1024:
                 self.LoginWindow = QtWidgets.QMainWindow()
@@ -57,9 +61,7 @@ class CreateAccountWindowUI(object):
                 self.LoginWindow.showMaximized()
                 self.LoginWindow.setFocus()
                 CreateAccountWindow.close()
-                create_user_account.create_account(self.name_input.text(), self.email_input.text(), self.password_input.text())
             else:
-                create_user_account.create_account(self.name_input.text(), self.email_input.text(), self.password_input.text())
                 self.name_input.clear()
                 self.email_input.clear()
                 self.password_input.clear()

@@ -8,9 +8,13 @@ Created by: PyQt5 UI code generator 5.15.4
 import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 from qtwidgets import PasswordEdit
 
 from src.CreateAccountUI.create_account import CreateAccountWindowUI
+from src import create_account_login
+from src import main_main
+from src import remember_me
 
 # Only for testing
 from src.MainUI.main_window import Ui_MainWindow
@@ -21,6 +25,58 @@ path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 class LoginWindowUI(object):
     """The Login Window Class."""
 
+    def open_main(self, LoginWindow):
+        """Open MainWindow, after successful login."""
+        __login_success = True
+
+        if self.email_input.text() == "" and self.password_input.text() == "":
+            __login_success = False
+
+        elif self.email_input.text() == "" or self.password_input.text() == "":
+            __login_success = False
+            self.error_popup()
+
+        elif not create_account_login.check_if_email_exists(self.email_input.text()) or not create_account_login.decrypt(self.email_input.text(), self.password_input.text()):
+            __login_success = False
+            self.login_error_popup()
+
+        if __login_success:
+            main_main.logged_in_user(self.email_input.text())    # noqa
+            if self.remember_password.isChecked():
+                remember_me.remember_user(self.email_input.text(), self.password_input.text())
+            elif not self.remember_password.isChecked():
+                remember_me.forget_me()
+            self.MainWindow = QtWidgets.QMainWindow()
+            self.ui = Ui_MainWindow()
+            self.ui.setupUi(self.MainWindow)
+            self.MainWindow.showMaximized()
+            LoginWindow.close()
+
+    def remember_me_popup(self):
+        """Remember me."""
+        if self.remember_password.isChecked():
+            msg = QMessageBox()
+            msg.setWindowTitle("Remember me.")
+            msg.setText("Please do not store your username and password, if the computer is easily accessible to other people!")
+            msg.setIcon(QMessageBox.Warning)
+            msg.exec_()
+
+    def login_error_popup(self):
+        """Wrong Email or Password."""
+        msg = QMessageBox()
+        msg.setWindowTitle("Wrong Email or Password.")
+        msg.setText("You have entered a wrong Email address or Password. Try again")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
+    def error_popup(self):
+        """Something went wrong."""
+        msg = QMessageBox()
+        msg.setWindowTitle("Something went wrong.")
+        msg.setText("Please check that all fields are properly filled and try again!")
+        msg.setIcon(QMessageBox.Information)
+        msg.exec_()
+
     def open_create_acc(self, LoginWindow):
         """Open the Create Account window."""
         self.CreateAccountWindow = QtWidgets.QMainWindow()
@@ -30,16 +86,9 @@ class LoginWindowUI(object):
         self.CreateAccountWindow.setFocus()
         LoginWindow.close()
 
-    def open_main(self, LoginWindow):
-        """Open MainWindow, after successful login."""
-        self.MainWindow = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.MainWindow)
-        self.MainWindow.showMaximized()
-        LoginWindow.close()
-
     def setupUi(self, LoginWindow):
         """UI Setup."""
+        email, password = remembered()
         LoginWindow.setObjectName("LoginWindow")
         LoginWindow.resize(1500, 820)
         LoginWindow.setStyleSheet("* {\n"
@@ -163,6 +212,7 @@ class LoginWindowUI(object):
             "padding: 5px;\n"
             "height:35px;")
 
+        self.email_input.setText(f"{email}")
         self.email_input.setObjectName("email_input")
         self.email_layout.addWidget(self.email_input)
         self.logo = QtWidgets.QLabel(self.sign_in_frame_inner)
@@ -193,7 +243,8 @@ class LoginWindowUI(object):
         self.password_input.setStyleSheet("background: rgba(243,151,102, 0.05);\n"
             "padding: 5px;\n"
             "height: 35px;")
-        self.password_input.setText("")
+
+        self.password_input.setText(f"{password}")
         self.password_input.setObjectName("password_input")
         self.password_layout.addWidget(self.password_input)
         self.sign_in = QtWidgets.QPushButton(
@@ -217,7 +268,11 @@ class LoginWindowUI(object):
         self.remember_forgot_layout = QtWidgets.QHBoxLayout(self.layoutWidget3)
         self.remember_forgot_layout.setContentsMargins(0, 0, 0, 0)
         self.remember_forgot_layout.setObjectName("remember_forgot_layout")
-        self.remember_password = QtWidgets.QCheckBox(self.layoutWidget3)
+        self.remember_password = QtWidgets.QCheckBox(
+            self.layoutWidget3, clicked=lambda: self.remember_me_popup())
+        if remember_me.check_if_user_remembered():
+            self.remember_password.setChecked(True)
+
         self.remember_password.setStyleSheet("font-size: 16px;\n"
             "color: #a3a3a3;\n"
             "padding-bottom:3px;")
@@ -267,8 +322,19 @@ class LoginWindowUI(object):
         self.forgot_password.setText(_translate("LoginWindow", "Forgot password?"))
 
 
+def remembered():
+    """."""
+    remember = remember_me.check_if_user_remembered()
+    if remember:
+        email, passw = remember_me.get_name_pwd()
+        return email, passw
+    else:
+        return "", ""
+
+
 def login_main():
     """Run the window."""
+    remembered()
     app = QtWidgets.QApplication(sys.argv)
     LoginWindow = QtWidgets.QMainWindow()
     ui = LoginWindowUI()

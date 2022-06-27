@@ -4,7 +4,7 @@
 Hi, it's Liis.
 Weekleh is a test app that I'm creating.
 
-#### Intro
+## Intro
 
 Weekleh is your weekly to-do list,
 where you log in, add your weekly to do item.
@@ -23,16 +23,21 @@ Well, let us see if we can actually make it happen.
 ## Features
 
 1. Log in
-2. Add a note
-3. Mark it done
-4. Delete a note
-5. New week
-6. Archive the note
-7. Log out
+2. Remember me
+3. Forgot password
+4. Create Account
+
+5. Add a to-do item
+6. Mark it done
+7. Delete the to-do item
+8. Weeks view (Weekleh)
+9. Day view
+10. Archive the note
+11. Log out
 
 
 ## General
 
-- Front end: PyQt
-- Backend: Python
+- Front end: PyQt5
 - Database: SQLite
+- Backend: Python
