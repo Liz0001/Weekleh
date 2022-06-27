@@ -12,12 +12,14 @@ from PyQt5.QtWidgets import QMessageBox
 from qtwidgets import PasswordEdit
 
 from src.CreateAccountUI.create_account import CreateAccountWindowUI
+from src.PasswordResetUI.password_reset_screen import ResetPasswordWindowUI
 from src import create_account_login
 from src import main_main
 from src import remember_me
 
 # Only for testing
 from src.MainUI.main_window import Ui_MainWindow
+
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 
@@ -76,6 +78,15 @@ class LoginWindowUI(object):
         msg.setText("Please check that all fields are properly filled and try again!")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
+    
+    def open_forgot_pass(self, LoginWindow):
+        """Forgot password."""
+        self.ResetPasswordWindow = QtWidgets.QMainWindow()
+        self.ui = ResetPasswordWindowUI()
+        self.ui.setupUi(self.ResetPasswordWindow)
+        self.ResetPasswordWindow.showMaximized()
+        self.ResetPasswordWindow.setFocus()
+        LoginWindow.close()
 
     def open_create_acc(self, LoginWindow):
         """Open the Create Account window."""
@@ -279,7 +290,8 @@ class LoginWindowUI(object):
 
         self.remember_password.setObjectName("remember_password")
         self.remember_forgot_layout.addWidget(self.remember_password)
-        self.forgot_password = QtWidgets.QPushButton(self.layoutWidget3)
+        self.forgot_password = QtWidgets.QPushButton(
+            self.layoutWidget3, clicked=lambda: self.open_forgot_pass(LoginWindow))
         self.forgot_password.setStyleSheet("*{\n"
             "font-size: 16px;\n"
             "color: #a3a3a3;\n"
@@ -323,7 +335,7 @@ class LoginWindowUI(object):
 
 
 def remembered():
-    """."""
+    """This checks if the user has previously wanted to remember their user."""
     remember = remember_me.check_if_user_remembered()
     if remember:
         email, passw = remember_me.get_name_pwd()
