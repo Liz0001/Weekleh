@@ -4,7 +4,9 @@
 Hi, it's Liis.
 Weekleh is a test app that I'm creating.
 
-## Intro
+
+
+## About
 
 Weekleh is your weekly to-do list,
 where you log in, add your weekly to do item.
@@ -17,7 +19,17 @@ Well, let us see if we can actually make it happen.
 
 ## Installation
 
-...
+```bash
+git clone https://github.com/Liz0001/Weekleh.git
+```
+
+
+
+## Run the app from CMD
+
+```bash
+make plans
+```
 
 
 ## Features
@@ -36,8 +48,15 @@ Well, let us see if we can actually make it happen.
 11. Log out
 
 
+
 ## General
 
 - Front end: PyQt5
 - Database: SQLite
 - Backend: Python
+
+
+
+## License
+
+[MIT](https://github.com/Liz0001/Weekleh/blob/main/LICENCE.MD)
