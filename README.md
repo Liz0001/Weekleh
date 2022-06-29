@@ -25,7 +25,7 @@ git clone https://github.com/Liz0001/Weekleh.git
 
 
 
-## Run the app from CMD
+## Run the app from Command Line
 
 ```bash
 make plans
