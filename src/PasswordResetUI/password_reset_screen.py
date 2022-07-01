@@ -13,6 +13,8 @@ from PyQt5.QtWidgets import QMessageBox
 from src.LoginUI import login
 from src import create_account_login
 from src import login_security
+from src.PasswordResetUI import enter_token
+from src import forgot_password
 
 sys.path.insert(0, "../src")
 path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
@@ -21,7 +23,7 @@ path = os.path.dirname(os.path.abspath(f"{__file__}/.."))
 class ResetPasswordWindowUI(object):
     """The Reset Password class."""
 
-    def reset_pass_token(self):
+    def reset_pass_token(self, current_window):
         """Reset pass, send token to email."""
         go_on = True
 
@@ -31,25 +33,31 @@ class ResetPasswordWindowUI(object):
         elif not login_security.check_email(self.email_input.text()):
             go_on = False
             self.invalid_email_popup()
-        
+
         elif not create_account_login.check_if_email_exists(self.email_input.text()):
             go_on = False
             self.not_in_db_popup()
 
         if go_on:
             self.token_sent_popup()
-            # close the current window and continue to last window
-            print("hehe, page open ....")
+            forgot_password.send_token_email(self.email_input.text())
+            forgot_password.user_forgot_the_password(self.email_input.text())
+            self.ResetPasswordWindow = QtWidgets.QMainWindow()
+            self.ui = enter_token.Ui_ResetPasswordWindow()
+            self.ui.setupUi(self.ResetPasswordWindow)
+            self.ResetPasswordWindow.showMaximized()
+            self.ResetPasswordWindow.setFocus()
+            current_window.close()
 
     def not_in_db_popup(self):
-        """The user is not in our database."""
+        """User does not exist in database."""
         msg = QMessageBox()
         msg.setWindowTitle("Check your Email")
         msg.setText("We cannot find your information.")
-        msg.setText('Please sign up for an account or contact Customer Service: "jello.bello.marshmellow@gmail.com"')
+        msg.setInformativeText('Please sign up for an account or contact Customer Service: "jello.bello.marshmellow@gmail.com"')
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
-        
+
     def invalid_email_popup(self):
         """Give a warning that email is not valid."""
         msg = QMessageBox()
@@ -63,7 +71,7 @@ class ResetPasswordWindowUI(object):
         msg = QMessageBox()
         msg.setWindowTitle("Token sent.")
         msg.setText("Check Your Email.")
-        msg.setInformativeText('We have sent a Token to your email for password reset. Token is valid for 30 minutes.')
+        msg.setInformativeText("We have sent a Token to your email for password reset. Token is valid for 30 minutes.\n\nPlease don't close the application, you'll be directed to the next page!")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
 
@@ -167,7 +175,7 @@ class ResetPasswordWindowUI(object):
         self.logo.setScaledContents(True)
         self.logo.setObjectName("logo")
         self.send_token = QtWidgets.QPushButton(
-            self.reste_frame_inner, clicked=lambda: self.reset_pass_token())
+            self.reste_frame_inner, clicked=lambda: self.reset_pass_token(ResetPasswordWindow))
         self.send_token.setGeometry(QtCore.QRect(160, 500, 380, 50))
         self.send_token.setStyleSheet("#send_token {\n"
             "background: rgba(243,151,102, 0.9);\n"

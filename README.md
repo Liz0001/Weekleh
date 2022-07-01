@@ -1,8 +1,9 @@
 # WEEKLEH
-=========
+============
 
 Hi, it's Liis.
 Weekleh is a test app that I'm creating.
+
 
 
 
@@ -17,6 +18,7 @@ Well, let us see if we can actually make it happen.
 
 
 
+
 ## Installation
 
 ```bash
@@ -25,11 +27,14 @@ git clone https://github.com/Liz0001/Weekleh.git
 
 
 
+
 ## Run the app from Command Line
 
 ```bash
 make plans
 ```
+
+
 
 
 ## Features
@@ -49,11 +54,13 @@ make plans
 
 
 
+
 ## General
 
 - Front end: PyQt5
 - Database: SQLite
 - Backend: Python
+
 
 
 

@@ -4,7 +4,7 @@ from src import create_account_login
 
 
 def logged_in_user(user_email):
-    """get the email."""
+    """Get the email."""
     with open('src/active.txt', 'w') as f:
         f.write(user_email)
 
@@ -18,4 +18,5 @@ def greet():
 
 
 def main():
-    """Main."""
+    """Ze Main."""
+    pass
