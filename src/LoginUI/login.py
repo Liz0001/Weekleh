@@ -78,7 +78,7 @@ class LoginWindowUI(object):
         msg.setText("Please check that all fields are properly filled and try again!")
         msg.setIcon(QMessageBox.Information)
         msg.exec_()
-    
+
     def open_forgot_pass(self, LoginWindow):
         """Forgot password."""
         self.ResetPasswordWindow = QtWidgets.QMainWindow()
@@ -249,6 +249,7 @@ class LoginWindowUI(object):
         self.password_label.setAlignment(QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft)
         self.password_label.setObjectName("password_label")
         self.password_layout.addWidget(self.password_label)
+
         # password hide/show
         self.password_input = PasswordEdit()
         self.password_input.setStyleSheet("background: rgba(243,151,102, 0.05);\n"

@@ -6,3 +6,7 @@ src/__pycache__
 .vscode
 designer.exe - Shortcut.lnk
 .qt_for_python/*
+.coverage
+src/PasswordResetUI/forgot.txt
+src/active.txt
+src/remember_me.txt

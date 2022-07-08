@@ -1,8 +1,8 @@
 """Weekleh app."""
-import sys
+# import sys
 
 from src.LoginUI import login
-sys.path.insert(0, "..")
+# sys.path.insert(0, "..")
 
 
 def weekleh():
