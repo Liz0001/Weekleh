@@ -50,7 +50,7 @@ make plans
 -----
 .
 .
-Future features ...
+Future features: 
 .
 5. Add a to-do item
 6. Mark it done
