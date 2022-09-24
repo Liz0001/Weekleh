@@ -1,8 +1,12 @@
 # WEEKLEH
 ============
 
+
+Currently waiting to continue, due to school
+
+
 Hi, it's Liis.
-Weekleh is a test app that I'm creating.
+Weekleh is a (test) app that I'm trying to create based on the knowledge from Agile course.
 
 
 
