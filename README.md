@@ -47,7 +47,11 @@ make plans
 2. Remember me
 3. Forgot password
 4. Create Account
-
+-----
+.
+.
+Future features ...
+.
 5. Add a to-do item
 6. Mark it done
 7. Delete the to-do item
